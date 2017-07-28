@@ -4,7 +4,7 @@
 
 {% block extra_head %}
 <style>
-    .post_photo {
+post_photo {
         max-width: 100%;
     }
     .post-map {
@@ -12,22 +12,26 @@
         height: 300px;
     }
 </style>
+{% if post.laglat %}
+    <script>
+    $(function() {
+        var lat = {{ post.lat }};
+        var lng = {{ post.lng }};
 
-<script>
-$(function() {
-    var myLatLng = { lat: -25.363, lng: 131.044 };
-    var container = $('.post-map')[0];
-    var map = new google.maps.Map(container, {
-        zoom: 4,
-        center: myLatLng
+        var myLatLng = { lat: lat, lng: lng};
+        var container = $('.post-map')[0];
+        var map = new google.maps.Map(container, {
+            zoom: 4,
+            center: myLatLng
+        });
+        var marker = new google.maps.Marker({
+            position: myLatLng,
+            map: map,
+            title: 'Hello World!'
+        });
     });
-    var marker = new google.maps.Marker({
-        position: myLatLng,
-        map: map,
-        title: 'Hello World!'
-    });
-});
-</script>
+    </script>
+{% endif %}
 <script src="https://maps.googleapis.com/maps/api/js"></script>
 {% endblock %}
 
