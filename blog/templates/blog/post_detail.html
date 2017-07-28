@@ -12,16 +12,15 @@ post_photo {
         height: 300px;
     }
 </style>
-{% if post.laglat %}
+{% if post.lnglat %}
     <script>
     $(function() {
         var lat = {{ post.lat }};
         var lng = {{ post.lng }};
-
         var myLatLng = { lat: lat, lng: lng};
         var container = $('.post-map')[0];
         var map = new google.maps.Map(container, {
-            zoom: 4,
+            zoom: 15,
             center: myLatLng
         });
         var marker = new google.maps.Marker({
